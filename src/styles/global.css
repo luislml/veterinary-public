@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/* Variables de color configurables - Se pueden cambiar aquí para actualizar toda la aplicación */
+:root {
+  --color-primary: #1a4d3a;
+  --color-primary-light: #2d6b4f;
+  --color-primary-dark: #0f2e22;
+  --color-accent: #ff6b6b;
+  --color-accent-light: #ff8e8e;
+  --color-accent-dark: #e55555;
+}
+
+/* Asegurar que el sticky funcione correctamente */
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+}
+
+/* Animaciones personalizadas para Tailwind v4 */
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes jump-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(50px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Clases de utilidad para animaciones */
+.animate-fade-down {
+  animation: fade-down 0.7s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-left {
+  animation: fade-left 0.7s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-right {
+  animation: fade-right 0.7s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade {
+  animation: fade 1s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-jump-in {
+  animation: jump-in 0.7s ease-out forwards;
+  opacity: 0;
+}
+
+/* Utilidades para duración - usando !important para sobrescribir */
+.animate-duration-700 {
+  animation-duration: 700ms !important;
+}
+
+.animate-duration-1000 {
+  animation-duration: 1000ms !important;
+}
+
+/* Utilidades para delay */
+.animate-delay-200 {
+  animation-delay: 200ms !important;
+}
+
+.animate-delay-300 {
+  animation-delay: 300ms !important;
+}
+
+.animate-delay-400 {
+  animation-delay: 400ms !important;
+}
+
+.animate-delay-600 {
+  animation-delay: 600ms !important;
+}
