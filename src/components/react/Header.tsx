@@ -2,12 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 
 interface HeaderProps {
   phoneNumber?: string;
-  logoText?: string;
 }
 
 export default function Header({ 
-  phoneNumber = '(336) 275-7266',
-  logoText = 'southwoods ANIMAL HOSPITAL'
+  phoneNumber = '+591 7 222 222 222'
 }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
@@ -17,6 +15,30 @@ export default function Header({
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    
+    // Pequeño delay para asegurar que el menú móvil se cierre antes del scroll
+    setTimeout(() => {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        // Obtener la altura del header sticky (si está fijo) o del header normal
+        const headerHeight = isSticky && topBarRef.current 
+          ? topBarRef.current.offsetHeight 
+          : (topBarRef.current?.offsetHeight || 0);
+        
+        // Calcular la posición del target considerando el header
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20; // 20px de padding adicional
+        
+        window.scrollTo({
+          top: Math.max(0, targetPosition),
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
   };
 
   useEffect(() => {
@@ -109,14 +131,9 @@ export default function Header({
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2 md:gap-3">
-            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--color-primary-light)] flex items-center justify-center flex-shrink-0">
-              <svg className="w-6 h-6 md:w-8 md:h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
-              </svg>
-            </div>
-            <span className="text-[var(--color-primary)] font-bold text-sm md:text-lg uppercase tracking-wide hidden sm:block">
-              {logoText}
-            </span>
+            <a href="/">
+              <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=200&fit=crop&q=80" alt="logo" className="w-full h-15" />
+            </a>
           </div>
 
           {/* Right Side Buttons - Hidden on mobile */}
@@ -127,9 +144,9 @@ export default function Header({
             >
               {phoneNumber}
             </a>
-            <button className="px-6 py-2 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm">
-              APPOINTMENTS
-            </button>
+            <a href="#" className="px-6 py-2 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm">
+              Emergencias
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -160,12 +177,12 @@ export default function Header({
             >
               {phoneNumber}
             </a>
-            <button 
+            <a href="#" 
               className="block w-full px-4 py-2 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm"
               onClick={() => setIsMenuOpen(false)}
             >
-              APPOINTMENTS
-            </button>
+              EMERGENCIAS
+            </a>
           </div>
         )}
       </div>
@@ -177,37 +194,46 @@ export default function Header({
             <li>
               <a 
                 href="#about" 
-                className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0"
-                onClick={() => setIsMenuOpen(false)}
+                className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0 cursor-pointer"
+                onClick={(e) => handleSmoothScroll(e, 'about')}
               >
-                ABOUT US
+                ACERCA DE NOSOTROS
               </a>
             </li>
             <li>
               <a 
                 href="#services" 
-                className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0"
-                onClick={() => setIsMenuOpen(false)}
+                className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0 cursor-pointer"
+                onClick={(e) => handleSmoothScroll(e, 'services')}
               >
-                SERVICES
+                SERVICIOS
               </a>
             </li>
             <li>
               <a 
-                href="#client-info" 
-                className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0"
-                onClick={() => setIsMenuOpen(false)}
+                href="#team" 
+                className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0 cursor-pointer"
+                onClick={(e) => handleSmoothScroll(e, 'team')}
               >
-                CLIENT INFORMATION
+                NUESTRO EQUIPO
               </a>
             </li>
             <li>
               <a 
-                href="#store" 
-                className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0"
-                onClick={() => setIsMenuOpen(false)}
+                href="#testimonials" 
+                className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0 cursor-pointer"
+                onClick={(e) => handleSmoothScroll(e, 'testimonials')}
               >
-                ONLINE STORE
+                TESTIMONIOS
+              </a>
+            </li>
+            <li>
+              <a 
+                href="#contact" 
+                className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0 cursor-pointer"
+                onClick={(e) => handleSmoothScroll(e, 'contact')}
+              >
+                CONTÁCTANOS
               </a>
             </li>
           </ul>

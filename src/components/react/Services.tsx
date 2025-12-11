@@ -14,34 +14,34 @@ interface ServicesProps {
 
 const defaultServices: Service[] = [
   {
-    title: 'DERMATOLOGY',
+    title: 'Odontología',
     imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&q=80',
   },
   {
-    title: 'WELLNESS EXAMS',
+    title: 'Exámenes de bienestar',
     imageUrl: 'https://images.unsplash.com/photo-1551717743-49959800b1f6?w=600&q=80',
   },
   {
-    title: 'PHARMACY',
+    title: 'Farmacia',
     imageUrl: 'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&q=80',
   },
   {
-    title: 'PET ALLERGIES',
+    title: 'Alergias en mascotas',
     imageUrl: 'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&q=80',
   },
   {
-    title: 'PAIN MANAGEMENT',
+    title: 'Gestión del dolor',
     imageUrl: 'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&q=80',
   },
   {
-    title: 'LABORATORY SERVICES',
+    title: 'Servicios de laboratorio',
     imageUrl: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=80',
   },
 ];
 
 export default function Services({
-  title = 'LOOKING FOR VETERINARY SERVICES IN GREENSBORO, NC?',
-  description = 'We offer a comprehensive range of veterinary services to keep your pets healthy and happy. From routine wellness exams to specialized treatments, our experienced team is here to provide the best care for your furry family members.',
+  title = 'Lorem ipsum dolor sit amet consectetur elit, dolor sit amet consectetur elit.',
+  description = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
   services = defaultServices
 }: ServicesProps) {
   const [visibleItems, setVisibleItems] = useState<Set<number>>(new Set());
@@ -91,12 +91,12 @@ export default function Services({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
           {services.map((service, index) => (
             <div 
               key={index} 
               data-index={index}
-              className={`relative group overflow-hidden rounded-lg shadow-lg ${
+              className={`relative group ${
                 visibleItems.has(index) 
                   ? 'animate-jump-in animate-duration-700' 
                   : 'opacity-0'
@@ -105,23 +105,27 @@ export default function Services({
                 animationDelay: `${index * 100}ms`
               }}
             >
-              {/* Image */}
-              <div 
-                className="aspect-square bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
-                style={{ backgroundImage: `url(${service.imageUrl})` }}
-              >
+              <div className='relative overflow-hidden rounded-3xl shadow-lg'>
+                {/* Image */}
+                <div 
+                  className="aspect-16/9 bg-cover bg-center transition-transform duration-300 group-hover:scale-110 rounded-3xl shadow-lg"
+                  style={{ backgroundImage: `url(${service.imageUrl})` }}
+                >
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
               </div>
 
               {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">{service.title}</h3>
-                <a
-                  href={service.link || '#'}
-                  className="inline-block px-4 md:px-6 py-2 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm md:text-base"
-                >
-                  LEARN MORE
-                </a>
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4 uppercase text-center">{service.title}</h3>
+                <div className='text-center -mb-10'>
+                  <a
+                    href={service.link || '#'}
+                    className="inline-block px-4 md:px-6 py-2 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm md:text-base"
+                  >
+                    Ver más
+                  </a>
+                </div>
               </div>
             </div>
           ))}

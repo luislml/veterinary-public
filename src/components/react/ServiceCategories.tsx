@@ -12,15 +12,15 @@ interface ServiceCategoriesProps {
 
 const defaultServices: ServiceCard[] = [
   {
-    title: 'SHOP PHARMACY',
+    title: 'Farmacia',
     imageUrl: 'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&q=80',
   },
   {
-    title: 'ONLINE FORMS',
+    title: 'Peluquería',
     imageUrl: 'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&q=80',
   },
   {
-    title: 'PET PORTAL',
+    title: 'Cuidado de mascotas',
     imageUrl: 'https://images.unsplash.com/photo-1551717743-49959800b1f6?w=600&q=80',
   },
 ];
@@ -80,7 +80,7 @@ export default function ServiceCategories({ services = defaultServices }: Servic
                   href={service.link || '#'}
                   className="inline-block px-4 md:px-6 py-2 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm md:text-base"
                 >
-                  LEARN MORE
+                  Ver más
                 </a>
               </div>
             </div>

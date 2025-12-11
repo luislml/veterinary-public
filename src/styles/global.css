@@ -11,12 +11,14 @@
 }
 
 /* Asegurar que el sticky funcione correctamente */
-html, body {
+html {
+  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
 body {
   position: relative;
+  overflow-x: hidden;
 }
 
 /* Animaciones personalizadas para Tailwind v4 */

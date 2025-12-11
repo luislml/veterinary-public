@@ -7,8 +7,8 @@ interface MeetOurTeamProps {
 }
 
 export default function MeetOurTeam({
-  title = 'MEET OUR TEAM',
-  description = 'Our dedicated team of veterinarians, veterinary technicians, and support staff are passionate about providing the highest quality care for your pets. With years of experience and a genuine love for animals, we work together to ensure your pet receives personalized attention and the best possible treatment.',
+  title = 'Lorem ipsum dolor sit amet consectetur elit.',
+  description = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
   imageUrl = 'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=800&q=80'
 }: MeetOurTeamProps) {
   const [isVisible, setIsVisible] = useState(false);
@@ -32,7 +32,7 @@ export default function MeetOurTeam({
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-[var(--color-primary)] text-white">
+    <section id="team" ref={sectionRef} className="bg-[var(--color-primary)] text-white">
       <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Image */}
@@ -53,9 +53,6 @@ export default function MeetOurTeam({
             <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 leading-relaxed">
               {description}
             </p>
-            <button className="w-full sm:w-auto px-6 md:px-8 py-2.5 md:py-3 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm md:text-base">
-              GET TO KNOW US
-            </button>
           </div>
         </div>
       </div>

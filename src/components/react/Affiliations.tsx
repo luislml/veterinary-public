@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 interface Affiliation {
   name: string;
-  logo?: string;
-  description?: string;
+  logoUrl: string;
 }
 
 interface AffiliationsProps {
@@ -11,9 +10,22 @@ interface AffiliationsProps {
 }
 
 const defaultAffiliations: Affiliation[] = [
-  { name: 'AVMA', description: 'Our Mission: Our Profession' },
-  { name: '25 YEARS', description: 'Experience' },
-  { name: 'NCVMA', description: 'North Carolina Veterinary Medical Association' },
+  { 
+    name: 'Brand 1',
+    logoUrl: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=200&h=200&fit=crop&q=80'
+  },
+  { 
+    name: 'Brand 2',
+    logoUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop&q=80'
+  },
+  { 
+    name: 'Brand 3',
+    logoUrl: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=200&h=200&fit=crop&q=80'
+  },
+  { 
+    name: 'Brand 4',
+    logoUrl: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=200&h=200&fit=crop&q=80'
+  },
 ];
 
 export default function Affiliations({ affiliations = defaultAffiliations }: AffiliationsProps) {
@@ -47,7 +59,7 @@ export default function Affiliations({ affiliations = defaultAffiliations }: Aff
             <div 
               key={index} 
               data-index={index}
-              className={`text-center w-full sm:w-auto ${
+              className={`w-full sm:w-auto ${
                 visibleItems.has(index) 
                   ? 'animate-jump-in animate-duration-700' 
                   : 'opacity-0'
@@ -56,14 +68,13 @@ export default function Affiliations({ affiliations = defaultAffiliations }: Aff
                 animationDelay: `${index * 150}ms`
               }}
             >
-              <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-white rounded-full flex items-center justify-center mb-3 md:mb-4 shadow-lg mx-auto">
-                <span className="text-[var(--color-primary)] font-bold text-sm sm:text-base md:text-lg text-center px-3 md:px-4">
-                  {affiliation.name}
-                </span>
+              <div className="w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 bg-white rounded-lg flex items-center justify-center shadow-lg mx-auto p-4 hover:scale-105 transition-transform duration-300">
+                <img 
+                  src={affiliation.logoUrl}
+                  alt={affiliation.name}
+                  className="max-w-full max-h-full object-contain"
+                />
               </div>
-              {affiliation.description && (
-                <p className="text-white text-xs sm:text-sm font-medium px-2">{affiliation.description}</p>
-              )}
             </div>
           ))}
         </div>
