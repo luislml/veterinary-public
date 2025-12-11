@@ -4,7 +4,7 @@ interface HeaderProps {
   phoneNumber?: string;
 }
 
-export default function Header({ 
+export default function Header({
   phoneNumber = '+591 7 222 222 222'
 }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,19 +20,19 @@ export default function Header({
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     setIsMenuOpen(false);
-    
+
     // Pequeño delay para asegurar que el menú móvil se cierre antes del scroll
     setTimeout(() => {
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
         // Obtener la altura del header sticky (si está fijo) o del header normal
-        const headerHeight = isSticky && topBarRef.current 
-          ? topBarRef.current.offsetHeight 
+        const headerHeight = isSticky && topBarRef.current
+          ? topBarRef.current.offsetHeight
           : (topBarRef.current?.offsetHeight || 0);
-        
+
         // Calcular la posición del target considerando el header
         const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20; // 20px de padding adicional
-        
+
         window.scrollTo({
           top: Math.max(0, targetPosition),
           behavior: 'smooth'
@@ -66,17 +66,17 @@ export default function Header({
         window.requestAnimationFrame(() => {
           if (headerRef.current && topBarRef.current) {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
+
             // Usar un threshold para evitar cambios constantes
             const threshold = 10;
             const shouldBeSticky = scrollTop > threshold;
-            
+
             // Solo actualizar si el estado realmente cambió
             if (shouldBeSticky !== lastStickyState && Math.abs(scrollTop - lastScrollTop) > 5) {
               setIsSticky(shouldBeSticky);
               lastStickyState = shouldBeSticky;
               lastScrollTop = scrollTop;
-              
+
               // Actualizar altura expuesta
               if (typeof window !== 'undefined') {
                 const height = topBarRef.current.offsetHeight;
@@ -116,7 +116,7 @@ export default function Header({
   return (
     <header ref={headerRef}>
       {/* Sticky Top Bar - Solo logo y contacto */}
-      <div 
+      <div
         ref={topBarRef}
         className="bg-white shadow-sm z-50 w-full"
         style={{
@@ -138,7 +138,7 @@ export default function Header({
 
           {/* Right Side Buttons - Hidden on mobile */}
           <div className="hidden md:flex items-center gap-3">
-            <a 
+            <a
               href={`tel:${phoneNumber.replace(/\D/g, '')}`}
               className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition-colors text-sm"
             >
@@ -170,14 +170,14 @@ export default function Header({
         {/* Mobile Buttons - Show when menu is open */}
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-200 px-4 py-3 space-y-2">
-            <a 
+            <a
               href={`tel:${phoneNumber.replace(/\D/g, '')}`}
               className="block w-full text-center px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition-colors text-sm"
               onClick={() => setIsMenuOpen(false)}
             >
               {phoneNumber}
             </a>
-            <a href="#" 
+            <a href="#"
               className="block w-full px-4 py-2 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm"
               onClick={() => setIsMenuOpen(false)}
             >
@@ -192,8 +192,8 @@ export default function Header({
         <div className="container mx-auto px-4">
           <ul className="flex flex-col md:flex-row gap-4 md:gap-8 py-4">
             <li>
-              <a 
-                href="#about" 
+              <a
+                href="#about"
                 className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0 cursor-pointer"
                 onClick={(e) => handleSmoothScroll(e, 'about')}
               >
@@ -201,8 +201,8 @@ export default function Header({
               </a>
             </li>
             <li>
-              <a 
-                href="#services" 
+              <a
+                href="#services"
                 className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0 cursor-pointer"
                 onClick={(e) => handleSmoothScroll(e, 'services')}
               >
@@ -210,8 +210,8 @@ export default function Header({
               </a>
             </li>
             <li>
-              <a 
-                href="#team" 
+              <a
+                href="#team"
                 className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0 cursor-pointer"
                 onClick={(e) => handleSmoothScroll(e, 'team')}
               >
@@ -219,8 +219,8 @@ export default function Header({
               </a>
             </li>
             <li>
-              <a 
-                href="#testimonials" 
+              <a
+                href="#testimonials"
                 className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0 cursor-pointer"
                 onClick={(e) => handleSmoothScroll(e, 'testimonials')}
               >
@@ -228,8 +228,8 @@ export default function Header({
               </a>
             </li>
             <li>
-              <a 
-                href="#contact" 
+              <a
+                href="#contact"
                 className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0 cursor-pointer"
                 onClick={(e) => handleSmoothScroll(e, 'contact')}
               >
