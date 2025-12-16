@@ -49,24 +49,23 @@ export default function ServiceCategories({ services = defaultServices }: Servic
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-12 sm:py-16 bg-white">
+    <section id="servicecategories" ref={sectionRef} className="py-12 sm:py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {services.map((service, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               data-index={index}
-              className={`relative group overflow-hidden rounded-lg shadow-lg ${
-                visibleCards.has(index) 
-                  ? 'animate-jump-in animate-duration-700' 
-                  : 'opacity-0'
-              }`}
+              className={`relative group overflow-hidden rounded-lg shadow-lg ${visibleCards.has(index)
+                ? 'animate-jump-in animate-duration-700'
+                : 'opacity-0'
+                }`}
               style={{
                 animationDelay: `${index * 150}ms`
               }}
             >
               {/* Image */}
-              <div 
+              <div
                 className="aspect-square bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
                 style={{ backgroundImage: `url(${service.imageUrl})` }}
               >
@@ -76,12 +75,6 @@ export default function ServiceCategories({ services = defaultServices }: Servic
               {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
                 <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">{service.title}</h3>
-                <a
-                  href={service.link || '#'}
-                  className="inline-block px-4 md:px-6 py-2 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm md:text-base"
-                >
-                  Ver más
-                </a>
               </div>
             </div>
           ))}

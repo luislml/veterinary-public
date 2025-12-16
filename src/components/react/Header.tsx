@@ -2,10 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 
 interface HeaderProps {
   phoneNumber?: string;
+  logoUrl?: string;
+  hospitalName?: string;
 }
 
 export default function Header({
-  phoneNumber = '+591 7 222 222 222'
+  phoneNumber = '+591 7 222 222 222',
+  logoUrl = 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=200&fit=crop&q=80',
+  hospitalName = ''
 }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
@@ -130,16 +134,23 @@ export default function Header({
       >
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2 md:gap-3">
-            <a href="/">
-              <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=200&fit=crop&q=80" alt="logo" className="w-full h-15" />
+          <div className="flex items-center gap-3 md:gap-4">
+            <a href="/" className="flex items-center gap-3">
+              <img src={logoUrl} alt="logo" className="h-12 md:h-16 w-auto object-contain" />
+              {hospitalName && (
+                <span className="text-lg md:text-xl font-bold text-[var(--color-primary)] uppercase tracking-wide">
+                  {hospitalName}
+                </span>
+              )}
             </a>
           </div>
 
           {/* Right Side Buttons - Hidden on mobile */}
           <div className="hidden md:flex items-center gap-3">
             <a
-              href={`tel:${phoneNumber.replace(/\D/g, '')}`}
+              href={`https://wa.me/${phoneNumber.replace(/\D/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition-colors text-sm"
             >
               {phoneNumber}
@@ -171,7 +182,9 @@ export default function Header({
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-200 px-4 py-3 space-y-2">
             <a
-              href={`tel:${phoneNumber.replace(/\D/g, '')}`}
+              href={`https://wa.me/${phoneNumber.replace(/\D/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="block w-full text-center px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition-colors text-sm"
               onClick={() => setIsMenuOpen(false)}
             >
@@ -198,6 +211,15 @@ export default function Header({
                 onClick={(e) => handleSmoothScroll(e, 'about')}
               >
                 ACERCA DE NOSOTROS
+              </a>
+            </li>
+            <li>
+              <a
+                href="#servicecategories"
+                className="block text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium transition-colors py-2 md:py-0 cursor-pointer"
+                onClick={(e) => handleSmoothScroll(e, 'servicecategories')}
+              >
+                ESPECIALIDADES
               </a>
             </li>
             <li>

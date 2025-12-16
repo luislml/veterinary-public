@@ -25,7 +25,7 @@ const defaultTestimonials: Testimonial[] = [
   },
 ];
 
-export default function Testimonials({ 
+export default function Testimonials({
   testimonials = defaultTestimonials,
   imageUrl = 'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=800&q=80'
 }: TestimonialsProps) {
@@ -85,7 +85,7 @@ export default function Testimonials({
 
   const nextTestimonial = () => {
     if (isTransitioning) return;
-    
+
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -97,7 +97,7 @@ export default function Testimonials({
 
   const prevTestimonial = () => {
     if (isTransitioning) return;
-    
+
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
@@ -109,7 +109,7 @@ export default function Testimonials({
 
   const goToTestimonial = (index: number) => {
     if (isTransitioning || index === currentIndex) return;
-    
+
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentIndex(index);
@@ -122,28 +122,25 @@ export default function Testimonials({
   return (
     <section id="testimonials" ref={sectionRef} className="grid grid-cols-1 lg:grid-cols-2">
       {/* Image Side */}
-      <div 
-        className={`aspect-[4/5] lg:aspect-auto min-h-[300px] lg:min-h-0 bg-cover bg-center order-2 lg:order-1 ${
-          isVisible ? 'animate-fade-right animate-duration-700' : 'opacity-0'
-        }`}
+      <div
+        className={`aspect-[4/5] lg:aspect-auto min-h-[300px] lg:min-h-0 bg-cover bg-center order-2 lg:order-1 ${isVisible ? 'animate-fade-right animate-duration-700' : 'opacity-0'
+          }`}
         style={{ backgroundImage: `url(${imageUrl})` }}
       ></div>
 
       {/* Testimonials Side */}
-      <div className={`bg-[var(--color-primary)] text-white p-6 sm:p-8 md:p-12 flex flex-col justify-center order-1 lg:order-2 ${
-        isVisible ? 'animate-fade-left animate-duration-700 animate-delay-200' : 'opacity-0'
-      }`}>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8">TESTIMONIALS</h2>
-        
-        <div 
+      <div className={`bg-[var(--color-primary)] text-white p-6 sm:p-8 md:p-12 flex flex-col justify-center order-1 lg:order-2 ${isVisible ? 'animate-fade-left animate-duration-700 animate-delay-200' : 'opacity-0'
+        }`}>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8">TESTIMONIOS</h2>
+
+        <div
           className="mb-6 md:mb-8 min-h-[200px] relative overflow-hidden"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div 
-            className={`transition-opacity duration-300 ${
-              isTransitioning ? 'opacity-0' : 'opacity-100'
-            }`}
+          <div
+            className={`transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'
+              }`}
           >
             <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-4 md:mb-6">
               "{testimonials[currentIndex].text}"
@@ -158,11 +155,10 @@ export default function Testimonials({
             <button
               key={index}
               onClick={() => goToTestimonial(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex 
-                  ? 'bg-white w-8' 
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex
+                  ? 'bg-white w-8'
                   : 'bg-white/40 hover:bg-white/60'
-              }`}
+                }`}
               aria-label={`Go to testimonial ${index + 1}`}
             />
           ))}

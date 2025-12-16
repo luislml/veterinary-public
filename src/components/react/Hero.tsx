@@ -32,12 +32,12 @@ export default function Hero({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-        <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 drop-shadow-lg leading-tight ${isVisible ? 'animate-fade-down animate-duration-1000' : 'opacity-0'
+      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
+        <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl tracking-wider leading-none uppercase ${isVisible ? 'animate-fade-down animate-duration-1000' : 'opacity-0'
           }`}>
           {title}
         </h1>
-        <p className={`text-base sm:text-lg md:text-xl lg:text-2xl text-white drop-shadow-md px-2 ${isVisible ? 'animate-fade-up animate-duration-1000 animate-delay-300' : 'opacity-0'
+        <p className={`text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-gray-100 drop-shadow-lg px-2 max-w-3xl mx-auto ${isVisible ? 'animate-fade-up animate-duration-1000 animate-delay-300' : 'opacity-0'
           }`}>
           {subtitle}
         </p>

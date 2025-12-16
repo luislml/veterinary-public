@@ -10,21 +10,21 @@ interface AffiliationsProps {
 }
 
 const defaultAffiliations: Affiliation[] = [
-  { 
+  {
     name: 'Brand 1',
-    logoUrl: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=200&h=200&fit=crop&q=80'
+    logoUrl: 'http://localhost:8000/storage/files/1.jpg'
   },
-  { 
+  {
     name: 'Brand 2',
-    logoUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop&q=80'
+    logoUrl: 'http://localhost:8000/storage/files/2.jpg'
   },
-  { 
+  {
     name: 'Brand 3',
-    logoUrl: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=200&h=200&fit=crop&q=80'
+    logoUrl: 'http://localhost:8000/storage/files/3.jpg'
   },
-  { 
+  {
     name: 'Brand 4',
-    logoUrl: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=200&h=200&fit=crop&q=80'
+    logoUrl: 'http://localhost:8000/storage/files/4.jpg'
   },
 ];
 
@@ -56,20 +56,19 @@ export default function Affiliations({ affiliations = defaultAffiliations }: Aff
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
           {affiliations.map((affiliation, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               data-index={index}
-              className={`w-full sm:w-auto ${
-                visibleItems.has(index) 
-                  ? 'animate-jump-in animate-duration-700' 
-                  : 'opacity-0'
-              }`}
+              className={`w-full sm:w-auto ${visibleItems.has(index)
+                ? 'animate-jump-in animate-duration-700'
+                : 'opacity-0'
+                }`}
               style={{
                 animationDelay: `${index * 150}ms`
               }}
             >
               <div className="w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 bg-white rounded-lg flex items-center justify-center shadow-lg mx-auto p-4 hover:scale-105 transition-transform duration-300">
-                <img 
+                <img
                   src={affiliation.logoUrl}
                   alt={affiliation.name}
                   className="max-w-full max-h-full object-contain"

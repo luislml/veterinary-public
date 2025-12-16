@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LandingPage from '../components/react/LandingPage';
+
+const { slug } = Astro.params;
+---
+
+<Layout>
+	<LandingPage client:load slug={slug} />
+</Layout>

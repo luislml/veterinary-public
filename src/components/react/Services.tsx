@@ -98,21 +98,17 @@ export default function Services({
                 </div>
 
                 {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4 uppercase text-center">
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/60 to-transparent">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2 uppercase text-center transform transition-transform duration-300 group-hover:-translate-y-2">
                     {service.title}
                   </h3>
                   {service.description && (
-                    <p className="text-sm md:text-base text-white/90 text-center mb-3">{service.description}</p>
+                    <div className="overflow-hidden max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                      <p className="text-sm md:text-base text-white/95 text-center px-2 pb-2">
+                        {service.description}
+                      </p>
+                    </div>
                   )}
-                  <div className="text-center -mb-10">
-                    <a
-                      href={service.link || '#'}
-                      className="inline-block px-4 md:px-6 py-2 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm md:text-base"
-                    >
-                      Ver más
-                    </a>
-                  </div>
                 </div>
               </div>
             );

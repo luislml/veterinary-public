@@ -7,7 +7,7 @@ interface MeetOurTeamProps {
 }
 
 export default function MeetOurTeam({
-  title = 'Nuestro equipo.',
+  title = 'NUESTRO EQUIPO.',
   description = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
   imageUrl = 'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=800&q=80'
 }: MeetOurTeamProps) {

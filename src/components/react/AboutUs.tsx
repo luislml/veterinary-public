@@ -6,7 +6,7 @@ interface AboutUsProps {
 }
 
 export default function AboutUs({
-  title = 'Acerca de Nosotros.',
+  title = 'ACERCA DE NOSOTROS.',
   description = 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
 }: AboutUsProps) {
   const [isVisible, setIsVisible] = useState(false);

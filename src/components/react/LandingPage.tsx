@@ -9,14 +9,19 @@ import Affiliations from './Affiliations';
 import Testimonials from './Testimonials';
 import Footer from './Footer';
 
-export default function LandingPage() {
+
+interface LandingPageProps {
+  slug?: string;
+}
+
+export default function LandingPage({ slug = "gatio-feo" }: LandingPageProps) {
   const [stickyHeight, setStickyHeight] = useState(0);
   const [landingData, setLandingData] = useState<any>(null);
 
   useEffect(() => {
     const fetchLandingData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/landing/gatio-feo");
+        const response = await fetch(`http://localhost:8000/api/landing/${slug}`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -130,10 +135,42 @@ export default function LandingPage() {
     phone: emergencyPhone,
   })) || [];
 
+  // SPECIALTIES MAPPED
+  const specialtiesMapped = landingData.content_veterinaries?.specialty?.map((item: any) => ({
+    title: item.title,
+    imageUrl: item.file?.url
+      ? `http://localhost:8000/${item.file.url}`
+      : "https://placehold.co/600x400",
+    link: "#",
+  })) || [];
+
+  // LOGO
+  const logoUrl = landingData?.images_veterinaries?.find((img: any) => img.type === "logo")?.file?.url
+    ? `http://localhost:8000/${landingData.images_veterinaries.find((img: any) => img.type === "logo").file.url}`
+    : "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=200&fit=crop&q=80";
+
+  const formatSchedules = (schedules: any[]) => {
+    if (!schedules || schedules.length === 0) return [];
+
+    const daysOrder = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", "Sábado", "Miércoles"];
+
+    // Normalize and sort
+    const sorted = [...schedules].sort((a, b) => {
+      return daysOrder.indexOf(a.days) - daysOrder.indexOf(b.days);
+    });
+
+    return sorted.map(item => ({
+      label: item.days,
+      hours: item.schedule
+    }));
+  };
+
   return (
     <main className="min-h-screen">
       <Header
-        phoneNumber={landingData?.configuration?.phone_emergency}
+        phoneNumber={landingData?.configuration?.phone_emergency || "+591 7 222 222 222"}
+        logoUrl={logoUrl}
+        hospitalName={landingData?.name}
       />
       {/* Spacer dinámico para compensar el header sticky - siempre presente para evitar saltos */}
       <div
@@ -148,13 +185,13 @@ export default function LandingPage() {
         subtitle={bannerData?.description || 'Descripción por defecto para banner'}
         imageUrl={bannerData?.file?.url ? `http://localhost:8000/${bannerData.file.url}` : 'https://placehold.co/1200x400'}
       />
-      <ServiceCategories />
+      <ServiceCategories services={specialtiesMapped} />
       <AboutUs
         description={landingData?.configuration?.about_us}
       />
       <Services
-        title="Nuestros Servicios"
-        description="Conoce los servicios que ofrecemos para tu mascota."
+        title="SERVICIOS"
+        description=""
         services={servicesMapped}
       />
       <MeetOurTeam
@@ -171,15 +208,10 @@ export default function LandingPage() {
         address={physicalAddress}
         phoneNumber={landingData?.configuration?.phone || ""}
         email={emailAddress}
-        businessHours={{
-          weekdays: landingData?.schedules?.find((s: any) =>
-            s.days.toLowerCase().includes("lunes")
-          )?.schedule || "No disponible",
-          weekend: landingData?.schedules?.find((s: any) =>
-            s.days.toLowerCase().includes("sábado") || s.days.toLowerCase().includes("domingo")
-          )?.schedule || "Cerrado"
-        }}
+        businessHours={formatSchedules(landingData?.schedules || [])}
         emergencyClinics={emergencyClinics}
+        socialLinks={landingData?.addresses?.social_media?.map((s: any) => s.address) || []}
+        mapUrl={landingData?.addresses?.map?.find((m: any) => m.address_type === "map")?.address}
       />
     </main>
   );
