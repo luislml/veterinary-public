@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { API_BASE_URL } from '../api';
 
 interface MeetOurTeamProps {
   title?: string;
@@ -40,7 +41,7 @@ export default function MeetOurTeam({
             }`}>
             <div
               className="aspect-[4/3] rounded-lg overflow-hidden shadow-2xl bg-cover bg-center"
-              style={{ backgroundImage: `url(http://localhost:8000/${imageUrl})` }}
+              style={{ backgroundImage: `url(${API_BASE_URL}/${imageUrl})` }}
             ></div>
           </div>
 

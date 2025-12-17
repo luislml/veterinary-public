@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../api';
 import Header from './Header';
 import Hero from './Hero';
 import ServiceCategories from './ServiceCategories';
@@ -14,14 +15,14 @@ interface LandingPageProps {
   slug?: string;
 }
 
-export default function LandingPage({ slug = "gatio-feo" }: LandingPageProps) {
+export default function LandingPage({ slug = "" }: LandingPageProps) {
   const [stickyHeight, setStickyHeight] = useState(0);
   const [landingData, setLandingData] = useState<any>(null);
 
   useEffect(() => {
     const fetchLandingData = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/landing/${slug}`);
+        const response = await fetch(`${API_BASE_URL}/api/landing/${slug}`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -92,13 +93,36 @@ export default function LandingPage({ slug = "gatio-feo" }: LandingPageProps) {
     }
   }, [landingData]);
 
+  // Actualizar Título y Favicon
+  useEffect(() => {
+    if (!landingData) return;
+
+    // Actualizar título
+    if (landingData.name) {
+      document.title = landingData.name;
+    }
+
+    // Actualizar favicon
+    const faviconUrlPath = landingData.configuration?.favicon?.url;
+    if (faviconUrlPath) {
+      const faviconUrl = `${API_BASE_URL}/${faviconUrlPath}`;
+      let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement;
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.getElementsByTagName('head')[0].appendChild(link);
+      }
+      link.href = faviconUrl;
+    }
+  }, [landingData]);
+
   if (!landingData) return null;
   // Mapeo API → props de Services
   const servicesMapped = landingData.content_veterinaries?.service?.map((item: any) => ({
     title: item.title,
     description: item.description,
     imageUrl: item.file?.url
-      ? `http://localhost:8000/${item.file.url}`
+      ? `${API_BASE_URL}/${item.file.url}`
       : "https://placehold.co/600x400",
     link: "#",
   })) || [];
@@ -111,7 +135,7 @@ export default function LandingPage({ slug = "gatio-feo" }: LandingPageProps) {
     })) || [];
   const testimonialImage =
     landingData?.images_veterinaries?.find((img: any) => img.type === "testimonial")?.file?.url
-      ? `http://localhost:8000/${landingData.images_veterinaries.find((img: any) => img.type === "testimonial").file.url}`
+      ? `${API_BASE_URL}/${landingData.images_veterinaries.find((img: any) => img.type === "testimonial").file.url}`
       : "https://placehold.co/600x400";
 
   // Extraemos banner de la API
@@ -138,15 +162,16 @@ export default function LandingPage({ slug = "gatio-feo" }: LandingPageProps) {
   // SPECIALTIES MAPPED
   const specialtiesMapped = landingData.content_veterinaries?.specialty?.map((item: any) => ({
     title: item.title,
+    description: item.description,
     imageUrl: item.file?.url
-      ? `http://localhost:8000/${item.file.url}`
+      ? `${API_BASE_URL}/${item.file.url}`
       : "https://placehold.co/600x400",
     link: "#",
   })) || [];
 
   // LOGO
   const logoUrl = landingData?.images_veterinaries?.find((img: any) => img.type === "logo")?.file?.url
-    ? `http://localhost:8000/${landingData.images_veterinaries.find((img: any) => img.type === "logo").file.url}`
+    ? `${API_BASE_URL}/${landingData.images_veterinaries.find((img: any) => img.type === "logo").file.url}`
     : "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=200&fit=crop&q=80";
 
   const formatSchedules = (schedules: any[]) => {
@@ -168,7 +193,8 @@ export default function LandingPage({ slug = "gatio-feo" }: LandingPageProps) {
   return (
     <main className="min-h-screen">
       <Header
-        phoneNumber={landingData?.configuration?.phone_emergency || "+591 7 222 222 222"}
+        phoneNumber={landingData?.configuration?.phone || "+591 7 222 222 222"}
+        emergencyPhoneNumber={landingData?.configuration?.phone_emergency || "+591 7 222 222 222"}
         logoUrl={logoUrl}
         hospitalName={landingData?.name}
       />
@@ -183,7 +209,7 @@ export default function LandingPage({ slug = "gatio-feo" }: LandingPageProps) {
       <Hero
         title={bannerData?.title || 'Título por defecto para banner'}
         subtitle={bannerData?.description || 'Descripción por defecto para banner'}
-        imageUrl={bannerData?.file?.url ? `http://localhost:8000/${bannerData.file.url}` : 'https://placehold.co/1200x400'}
+        imageUrl={bannerData?.file?.url ? `${API_BASE_URL}/${bannerData.file.url}` : 'https://placehold.co/1200x400'}
       />
       <ServiceCategories services={specialtiesMapped} />
       <AboutUs

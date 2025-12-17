@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { API_BASE_URL } from '../api';
 
 interface Affiliation {
   name: string;
@@ -12,19 +13,19 @@ interface AffiliationsProps {
 const defaultAffiliations: Affiliation[] = [
   {
     name: 'Brand 1',
-    logoUrl: 'http://localhost:8000/storage/files/1.jpg'
+    logoUrl: `${API_BASE_URL}/storage/files/1.jpg`
   },
   {
     name: 'Brand 2',
-    logoUrl: 'http://localhost:8000/storage/files/2.jpg'
+    logoUrl: `${API_BASE_URL}/storage/files/2.jpg`
   },
   {
     name: 'Brand 3',
-    logoUrl: 'http://localhost:8000/storage/files/3.jpg'
+    logoUrl: `${API_BASE_URL}/storage/files/3.jpg`
   },
   {
     name: 'Brand 4',
-    logoUrl: 'http://localhost:8000/storage/files/4.jpg'
+    logoUrl: `${API_BASE_URL}/storage/files/4.jpg`
   },
 ];
 

@@ -107,25 +107,17 @@ export default function Footer({
                         height="100%"
                         loading="lazy"
                         className="w-full h-full border-0"
+                        title={hospitalName || "Ubicación en el mapa"}
                       ></iframe>
                     );
                   }
 
                   return (
-                    <div className="text-center p-6">
-                      <svg className="w-12 h-12 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-center justify-center h-full bg-gray-100 text-gray-400">
+                      <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
-                      <p className="text-gray-600 mb-4">Ver ubicación en el mapa</p>
-                      <a
-                        href={mapUrl || "#"}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block px-6 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition-colors text-sm font-semibold"
-                      >
-                        ABRIR MAPA
-                      </a>
                     </div>
                   );
                 })()}
@@ -159,20 +151,24 @@ export default function Footer({
                 </div>
 
                 {/* Social Media */}
-                <div className="flex gap-3 flex-wrap">
-                  {socialLinks.filter(link => !link.includes('@')).map((link, index) => (
-                    <a
-                      key={index}
-                      href={link.includes('@') ? `mailto:${link}` : link}
-                      target={link.includes('@') ? undefined : "_blank"}
-                      rel="noopener noreferrer"
-                      className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${getSocialStyles(link)}`}
-                      aria-label="Social link"
-                    >
-                      {getSocialIcon(link)}
-                    </a>
-                  ))}
-                </div>
+                {socialLinks && socialLinks.length > 0 && (
+                  <div className="flex gap-3 flex-wrap">
+                    {socialLinks
+                      .filter(link => link && typeof link === 'string' && !link.includes('@'))
+                      .map((link, index) => (
+                        <a
+                          key={index}
+                          href={link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${getSocialStyles(link)}`}
+                          aria-label="Social link"
+                        >
+                          {getSocialIcon(link)}
+                        </a>
+                      ))}
+                  </div>
+                )}
               </div>
 
               {/* Business Hours & Emergency */}

@@ -86,29 +86,30 @@ export default function Services({
                 className={`relative group ${visibleItems.has(index) ? 'animate-jump-in animate-duration-700' : 'opacity-0'}`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="relative overflow-hidden rounded-3xl shadow-lg">
+                <div className="relative overflow-hidden rounded-3xl shadow-lg bg-gray-200">
                   {/* Image como background si existe, sino fallback con un div neutro */}
                   <div
-                    className="aspect-16/9 bg-cover bg-center transition-transform duration-300 group-hover:scale-110 rounded-3xl shadow-lg"
+                    className="aspect-16/9 bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
                     style={bg ? { backgroundImage: bg } : { backgroundColor: '#e5e7eb' }}
                     role="img"
                     aria-label={service.title}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                </div>
 
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/60 to-transparent">
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2 uppercase text-center transform transition-transform duration-300 group-hover:-translate-y-2">
-                    {service.title}
-                  </h3>
-                  {service.description && (
-                    <div className="overflow-hidden max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 transition-all duration-500 ease-in-out">
-                      <p className="text-sm md:text-base text-white/95 text-center px-2 pb-2">
-                        {service.description}
-                      </p>
-                    </div>
-                  )}
+                  {/* Overlays and Content */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
+
+                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2 uppercase text-center transform transition-transform duration-300 group-hover:-translate-y-2">
+                      {service.title}
+                    </h3>
+                    {service.description && (
+                      <div className="overflow-hidden max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                        <p className="text-sm md:text-base text-white/95 text-center px-2 pb-2">
+                          {service.description}
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             );

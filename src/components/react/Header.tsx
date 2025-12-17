@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 
 interface HeaderProps {
   phoneNumber?: string;
+  emergencyPhoneNumber?: string;
   logoUrl?: string;
   hospitalName?: string;
 }
 
 export default function Header({
   phoneNumber = '+591 7 222 222 222',
+  emergencyPhoneNumber = '+591 7 222 222 222',
   logoUrl = 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=200&fit=crop&q=80',
   hospitalName = ''
 }: HeaderProps) {
@@ -153,10 +155,15 @@ export default function Header({
               rel="noopener noreferrer"
               className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition-colors text-sm"
             >
-              {phoneNumber}
+              Tell: {phoneNumber}
             </a>
-            <a href="#" className="px-6 py-2 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm">
-              Emergencias
+            <a
+              href={`https://wa.me/${emergencyPhoneNumber.replace(/\D/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm"
+            >
+              Emergencias: {emergencyPhoneNumber}
             </a>
           </div>
 
@@ -188,13 +195,16 @@ export default function Header({
               className="block w-full text-center px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-dark)] transition-colors text-sm"
               onClick={() => setIsMenuOpen(false)}
             >
-              {phoneNumber}
+              Tell: {phoneNumber}
             </a>
-            <a href="#"
-              className="block w-full px-4 py-2 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm"
+            <a
+              href={`https://wa.me/${emergencyPhoneNumber.replace(/\D/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full text-center px-4 py-2 bg-[var(--color-accent)] text-white rounded-md hover:bg-[var(--color-accent-dark)] transition-colors font-semibold text-sm"
               onClick={() => setIsMenuOpen(false)}
             >
-              EMERGENCIAS
+              EMERGENCIAS: {emergencyPhoneNumber}
             </a>
           </div>
         )}

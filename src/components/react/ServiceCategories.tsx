@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 interface ServiceCard {
   title: string;
+  description?: string;
   imageUrl: string;
   link?: string;
 }
@@ -73,8 +74,15 @@ export default function ServiceCategories({ services = defaultServices }: Servic
               </div>
 
               {/* Content */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">{service.title}</h3>
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-all duration-300 group-hover:from-black/90">
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-2 transform transition-transform duration-300 group-hover:-translate-y-1">
+                  {service.title}
+                </h3>
+                {service.description && (
+                  <p className="text-sm md:text-base text-gray-200 line-clamp-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                    {service.description}
+                  </p>
+                )}
               </div>
             </div>
           ))}
