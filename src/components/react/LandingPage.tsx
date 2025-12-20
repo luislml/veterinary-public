@@ -237,7 +237,28 @@ export default function LandingPage({ slug = "" }: LandingPageProps) {
         businessHours={formatSchedules(landingData?.schedules || [])}
         emergencyClinics={emergencyClinics}
         socialLinks={landingData?.addresses?.social_media?.map((s: any) => s.address) || []}
-        mapUrl={landingData?.addresses?.map?.find((m: any) => m.address_type === "map")?.address || ""}
+        mapUrl={(() => {
+          const addresses = landingData?.addresses;
+          if (!addresses) return "";
+          
+          // Intentar acceder a la propiedad 'map' usando notación de corchetes
+          const mapData = addresses['map'];
+          if (Array.isArray(mapData)) {
+            const mapItem = mapData.find((m: any) => m.address_type === "map");
+            return mapItem?.address || "";
+          }
+          if (mapData && typeof mapData === 'object') {
+            return mapData.address || "";
+          }
+          
+          // Si no existe la propiedad 'map', buscar en un array general de addresses
+          if (Array.isArray(addresses)) {
+            const mapItem = addresses.find((a: any) => a.address_type === "map");
+            return mapItem?.address || "";
+          }
+          
+          return "";
+        })()}
       />
     </main>
   );
