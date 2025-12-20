@@ -237,7 +237,7 @@ export default function LandingPage({ slug = "" }: LandingPageProps) {
         businessHours={formatSchedules(landingData?.schedules || [])}
         emergencyClinics={emergencyClinics}
         socialLinks={landingData?.addresses?.social_media?.map((s: any) => s.address) || []}
-        mapUrl={landingData?.addresses?.map?.find((m: any) => m.address_type === "map")?.address}
+        mapUrl={landingData?.addresses?.map?.find((m: any) => m.address_type === "map")?.address || ""}
       />
     </main>
   );
